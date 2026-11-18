@@ -70,6 +70,9 @@ const headText = (page: Page) => page.locator('.brow.head').innerText();
 
 test.describe('book table @ 1302x800', () => {
   test.use({ viewport: { width: 1302, height: 800 } });
+  // "New" lists the last 30 days by the browser's clock; the mock library's newest book is
+  // from 2026-09-25 and does not move, so pin "today" to keep that list from going empty.
+  test.beforeEach(({ page }) => page.clock.setFixedTime(new Date('2026-09-27T12:00:00Z')));
 
   test('default columns fit with the details pane open and come back when it closes', async ({ page }) => {
     await openNewWithDetails(page);
