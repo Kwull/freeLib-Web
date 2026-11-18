@@ -51,7 +51,8 @@ jobs:
         run: cargo test --workspace
 
   web:
-    runs-on: ubuntu-latest
+    # Playwright 1.56 has no Chromium for ubuntu-latest (26.04); bump it before unpinning.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
